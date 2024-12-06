@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -20,9 +20,26 @@ const services = [
   { value: "confined-space-rescue", label: "Confined Space Rescue" },
 ]
 
+const formatPhoneNumber = (value: string) => {
+  if (!value) return value;
+  const phoneNumber = value.replace(/[^\d]/g, '');
+  const phoneNumberLength = phoneNumber.length;
+  if (phoneNumberLength < 4) return phoneNumber;
+  if (phoneNumberLength < 7) {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  }
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+};
+
 export function ContactSection() {
   const [isLoading, setIsLoading] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState('');
   const { toast } = useToast()
+
+  const handlePhoneChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedPhoneNumber = formatPhoneNumber(event.target.value);
+    setPhoneNumber(formattedPhoneNumber);
+  }, []);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -74,7 +91,14 @@ export function ContactSection() {
               >
                 <Input name="user_name" placeholder="Your Name" required />
                 <Input name="user_email" type="email" placeholder="Your Email" required />
-                <Input name="phone" type="tel" placeholder="Your Phone Number" required />
+                <Input
+                  name="phone"
+                  type="tel"
+                  placeholder="Your Phone Number"
+                  value={phoneNumber}
+                  onChange={handlePhoneChange}
+                  required
+                />
                 <Input name="company" placeholder="Company Name" required />
                 <Select name="service" required>
                   <SelectTrigger>
@@ -137,15 +161,6 @@ export function ContactSection() {
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle>Business Hours</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
-                <p>Saturday - Sunday: Closed</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
                 <CardTitle>Follow Us</CardTitle>
               </CardHeader>
               <CardContent>
@@ -169,4 +184,3 @@ export function ContactSection() {
     </section>
   )
 }
-

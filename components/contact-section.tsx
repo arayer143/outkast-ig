@@ -5,10 +5,20 @@ import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2, Mail, Phone, MapPin, ExternalLink } from 'lucide-react'
 import emailjs from '@emailjs/browser'
+
+const services = [
+  { value: "storage-tank-cleaning", label: "Storage Tank Cleaning" },
+  { value: "pipeline-system-cleaning", label: "Pipeline System Cleaning" },
+  { value: "vaccum-truck-services", label: "Vaccum Truck Services" },
+  { value: "chemical-cleaning", label: "Chemical Cleaning" },
+  { value: "hazardous-material-cleaning", label: "Hazardous Material Cleaning" },
+  { value: "confined-space-rescue", label: "Confined Space Rescue" },
+]
 
 export function ContactSection() {
   const [isLoading, setIsLoading] = useState(false)
@@ -52,7 +62,7 @@ export function ContactSection() {
           <Card>
             <CardHeader>
               <CardTitle>Send us a message</CardTitle>
-              <CardDescription>We&apos;d love to hear from you. Fill out the form below and we&apos;ll get back to you as soon as possible.</CardDescription>
+              <CardDescription>We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.</CardDescription>
             </CardHeader>
             <CardContent>
               <motion.form
@@ -63,7 +73,21 @@ export function ContactSection() {
                 transition={{ duration: 0.5 }}
               >
                 <Input name="user_name" placeholder="Your Name" required />
-                <Input name="user_email" type="email" placeholder="Your Email" required />
+                <Input name="user_email" type="email" placeholder="Your Email"  />
+                <Input name="phone" type="tel" placeholder="Your Phone Number"  />
+                <Input name="company" placeholder="Company Name" />
+                <Select name="service" required>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a service" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {services.map((service) => (
+                      <SelectItem key={service.value} value={service.value}>
+                        {service.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <Textarea name="message" placeholder="Your Message" required />
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? (

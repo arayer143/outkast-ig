@@ -31,10 +31,10 @@ export function ContactSection() {
     try {
       const form = event.currentTarget;
       await emailjs.sendForm(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         form,
-        'YOUR_PUBLIC_KEY'
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
 
       toast({
@@ -73,9 +73,9 @@ export function ContactSection() {
                 transition={{ duration: 0.5 }}
               >
                 <Input name="user_name" placeholder="Your Name" required />
-                <Input name="user_email" type="email" placeholder="Your Email"  />
-                <Input name="phone" type="tel" placeholder="Your Phone Number"  />
-                <Input name="company" placeholder="Company Name" />
+                <Input name="user_email" type="email" placeholder="Your Email" required />
+                <Input name="phone" type="tel" placeholder="Your Phone Number" required />
+                <Input name="company" placeholder="Company Name" required />
                 <Select name="service" required>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a service" />
@@ -169,3 +169,4 @@ export function ContactSection() {
     </section>
   )
 }
+

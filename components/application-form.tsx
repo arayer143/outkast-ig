@@ -22,19 +22,23 @@ export function ApplicationForm() {
 
     try {
       const form = event.currentTarget;
-      await emailjs.sendForm(
+      const result = await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID_APPLICATION!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_APPLICATION!,
         form,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY_APPLICATION!
       )
 
-      toast({
-        title: "Application submitted!",
-        description: "We'll review your application and get back to you soon.",
-      })
-      form.reset()
-      setFileName('')
+      if (result.text === 'OK') {
+        toast({
+          title: "Application submitted!",
+          description: "We'll review your application and get back to you soon.",
+        })
+        form.reset()
+        setFileName('')
+      } else {
+        throw new Error('Failed to send email')
+      }
     } catch (error) {
       console.error('Error sending application:', error)
       toast({

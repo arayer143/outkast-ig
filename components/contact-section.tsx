@@ -48,10 +48,10 @@ export function ContactSection() {
     try {
       const form = event.currentTarget;
       await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID_CONTACT!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_CONTACT!,
         form,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY_CONTACT!
       )
 
       toast({
@@ -59,6 +59,7 @@ export function ContactSection() {
         description: "We'll get back to you as soon as possible.",
       })
       form.reset()
+      setPhoneNumber('')
     } catch (error) {
       console.error('Error sending email:', error)
       toast({

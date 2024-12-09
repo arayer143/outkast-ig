@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,52 +9,66 @@ import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2, Upload } from 'lucide-react'
-import emailjs from '@emailjs/browser'
 
 export function ApplicationForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [fileName, setFileName] = useState('')
   const { toast } = useToast()
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) { // 10MB in bytes
+        toast({
+          title: "File too large",
+          description: "Please upload a file smaller than 10MB.",
+          variant: "destructive",
+        })
+        event.target.value = '' // Clear the file input
+        setFileName('')
+      } else {
+        setFileName(file.name)
+      }
+    }
+  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(true)
 
-    try {
-      const form = event.currentTarget;
-      const result = await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID_APPLICATION!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_APPLICATION!,
-        form,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY_APPLICATION!
-      )
+    if (!formRef.current) return
 
-      if (result.text === 'OK') {
+    const form = formRef.current
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch('/api/submit-application', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
         toast({
-          title: "Application submitted!",
-          description: "We'll review your application and get back to you soon.",
+          title: "Application submitted successfully!",
+          description: result.message || "We'll review your application and get back to you soon.",
         })
         form.reset()
         setFileName('')
       } else {
-        throw new Error('Failed to send email')
+        throw new Error(result.error || 'Failed to send application')
       }
     } catch (error) {
       console.error('Error sending application:', error)
       toast({
         title: "Something went wrong.",
-        description: "Please try again later.",
+        description: error instanceof Error ? error.message : "Please try again later.",
         variant: "destructive",
       })
     } finally {
       setIsLoading(false)
-    }
-  }
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
-      setFileName(file.name)
     }
   }
 
@@ -66,11 +80,13 @@ export function ApplicationForm() {
       </CardHeader>
       <CardContent>
         <motion.form
+          ref={formRef}
           onSubmit={onSubmit}
           className="space-y-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          encType="multipart/form-data"
         >
           <div className="space-y-2">
             <Label htmlFor="name">Full Name</Label>
@@ -97,9 +113,17 @@ export function ApplicationForm() {
             <Textarea id="message" name="message" placeholder="Tell us about your motivation and qualifications..." required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="resume">Upload Resume</Label>
+            <Label htmlFor="resume">Upload Resume (Max 10MB)</Label>
             <div className="flex items-center space-x-2">
-              <Input id="resume" name="resume" type="file" className="hidden" onChange={handleFileChange} accept=".pdf,.doc,.docx" required />
+              <Input 
+                id="resume" 
+                name="resume" 
+                type="file" 
+                className="hidden" 
+                onChange={handleFileChange} 
+                accept=".pdf,.doc,.docx" 
+                required 
+              />
               <Button type="button" variant="outline" onClick={() => document.getElementById('resume')?.click()}>
                 <Upload className="w-4 h-4 mr-2" />
                 Choose File

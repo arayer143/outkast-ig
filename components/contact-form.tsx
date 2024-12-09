@@ -1,15 +1,14 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2, Mail, Phone, MapPin, ExternalLink } from 'lucide-react'
-import emailjs from '@emailjs/browser'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const services = [
   { value: "storage-tank-cleaning", label: "Storage Tank Cleaning" },
@@ -35,36 +34,45 @@ export function ContactSection() {
   const [isLoading, setIsLoading] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState('');
   const { toast } = useToast()
+  const formRef = useRef<HTMLFormElement>(null)
 
-  const handlePhoneChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const formattedPhoneNumber = formatPhoneNumber(event.target.value);
     setPhoneNumber(formattedPhoneNumber);
-  }, []);
+  };
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(true)
 
-    try {
-      const form = event.currentTarget;
-      await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID_CONTACT!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_CONTACT!,
-        form,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY_CONTACT!
-      )
+    if (!formRef.current) return
 
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you as soon as possible.",
+    const form = formRef.current
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch('/api/submit-contact', {
+        method: 'POST',
+        body: formData,
       })
-      form.reset()
-      setPhoneNumber('')
+
+      const result = await response.json()
+
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "We'll get back to you as soon as possible.",
+        })
+        form.reset()
+        setPhoneNumber('')
+      } else {
+        throw new Error(result.error || 'Failed to send message')
+      }
     } catch (error) {
-      console.error('Error sending email:', error)
+      console.error('Error sending message:', error)
       toast({
         title: "Something went wrong.",
-        description: "Please try again later.",
+        description: error instanceof Error ? error.message : "Please try again later.",
         variant: "destructive",
       })
     } finally {
@@ -84,14 +92,15 @@ export function ContactSection() {
             </CardHeader>
             <CardContent>
               <motion.form
+                ref={formRef}
                 onSubmit={onSubmit}
                 className="space-y-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <Input name="user_name" placeholder="Your Name" required />
-                <Input name="user_email" type="email" placeholder="Your Email" required />
+                <Input name="name" placeholder="Your Name" required />
+                <Input name="email" type="email" placeholder="Your Email" required />
                 <Input
                   name="phone"
                   type="tel"
@@ -185,3 +194,4 @@ export function ContactSection() {
     </section>
   )
 }
+

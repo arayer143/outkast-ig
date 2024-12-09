@@ -7,7 +7,7 @@ import { ServicesSection } from "@/components/Home Page/our-services"
 import { CertificationSection } from "@/components/Home Page/certifications"
 import { CTASection } from "@/components/cta-section"
 import { WhyChooseUsSection } from "@/components/Home Page/why-choose-us"
-import { ContactSection } from "@/components/contact-section"
+import { ContactSection } from "@/components/contact-form"
 
 export default function Home() {
   return (

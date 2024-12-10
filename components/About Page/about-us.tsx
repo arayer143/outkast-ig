@@ -26,29 +26,31 @@ export default function AboutPage() {
   ]
 
   return (
-    <section className="py-12 md:py-24 lg:py-32 bg-gradient-to-br from-background via-background to-primary/10">
+    <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-background via-background to-primary/10">
       <div className="container px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center space-y-4 text-center mb-12"
+          className="flex flex-col items-center space-y-8 text-center mb-16"
         >
-          <div className="w-32 h-32 md:w-48 md:h-48 relative mb-4">
+          <div className="w-40 h-40 md:w-56 md:h-56 relative">
             <Image
-              src="/placeholder.svg?height=192&width=192"
+              src="/outkast-logo.webp"
               alt="OutKast Industrial Group Logo"
               layout="fill"
               objectFit="contain"
-              className="rounded-full bg-white p-2"
+              className="rounded-full shadow-lg"
             />
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-foreground">
-            About OutKast Industrial Group
-          </h1>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Family owned and operated, specializing in industrial decontamination
-          </p>
+          <div className="space-y-4">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+              About OutKast Industrial Group
+            </h1>
+            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Family owned and operated, specializing in industrial decontamination
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid gap-12 lg:grid-cols-2">
@@ -151,3 +153,4 @@ export default function AboutPage() {
     </section>
   )
 }
+

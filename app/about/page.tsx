@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import { Navbar } from '@/components/Navbar'
-import { ApplicationForm } from '@/components/application-form'
+
 import { Footer } from '@/components/Footer'
+import AboutPage from '@/components/About Page/about-us'
 
 export const metadata: Metadata = {
   title: 'Apply to Join Our Team | Outkastig',
@@ -14,8 +15,8 @@ export default function AboutUs() {
       <Navbar />
       <main className="flex-1">
         <section className="container mx-auto px-4 py-16">
-
-          <ApplicationForm />
+    <AboutPage />
+       
         </section>
       </main>
       <Footer />

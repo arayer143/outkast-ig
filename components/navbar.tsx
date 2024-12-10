@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Menu, Moon, Sun } from 'lucide-react'
+import Image from "next/image";
+import { ChevronDown, Menu, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 import { Button } from "@/components/ui/button"
@@ -22,10 +23,11 @@ import {
 
 const navigationItems = [
   { title: "Home", href: "/" },
-  { title: "About Us", href: "/about" },
+  { title: "About", href: "/about" },
   {
     title: "Services",
     content: [
+      { title: "All Services", href: "/services" },
       { title: "Storage Tank Cleaning", href: "/services/storage-tank-cleaning" },
       { title: "Pipeline System Cleaning", href: "/services/pipeline-system-cleaning" },
       { title: "Vaccum Truck Services", href: "/services/vaccum-truck-services" },
@@ -46,7 +48,7 @@ export function Navbar() {
       <div className="container grid grid-cols-3 h-16 items-center">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <OutKastLogo />
+            <Image src="/outkast-logo.webp" alt="OutKast Industrial Group Logo" width={70} height={60} className="h-8 w-auto rounded-full" />
             <span className="hidden font-bold text-lg sm:inline-block">
               OutKast Industrial Group
             </span>
@@ -126,26 +128,38 @@ export function Navbar() {
 }
 
 function MobileNav() {
+  const [showServices, setShowServices] = React.useState(false)
+
   return (
     <div className="flex flex-col space-y-4 p-4">
       <Link href="/" className="mb-4 flex items-center space-x-2">
-        <OutKastLogo />
+        <Image src="/logo.png" alt="OutKast Industrial Group Logo" width={40} height={40} className="h-8 w-auto rounded-md" />
         <span className="font-bold text-lg">OutKast Industrial Group</span>
       </Link>
       {navigationItems.map((item) => (
         <React.Fragment key={item.title}>
           {item.content ? (
             <>
-              <div className="font-medium text-base">{item.title}</div>
-              {item.content.map((subItem) => (
-                <Link
-                  key={subItem.title}
-                  href={subItem.href}
-                  className="pl-4 text-base text-muted-foreground hover:text-foreground"
-                >
-                  {subItem.title}
-                </Link>
-              ))}
+              <button
+                onClick={() => setShowServices(!showServices)}
+                className="flex items-center justify-between w-full text-left font-medium text-base"
+              >
+                {item.title}
+                <ChevronDown className={`h-4 w-4 transition-transform ${showServices ? 'rotate-180' : ''}`} />
+              </button>
+              {showServices && (
+                <div className="pl-4 space-y-2">
+                  {item.content.map((subItem) => (
+                    <Link
+                      key={subItem.title}
+                      href={subItem.href}
+                      className="block text-base text-muted-foreground hover:text-foreground"
+                    >
+                      {subItem.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </>
           ) : (
             <Link
@@ -158,22 +172,5 @@ function MobileNav() {
         </React.Fragment>
       ))}
     </div>
-  )
-}
-
-function OutKastLogo() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-6 w-6"
-    >
-      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-    </svg>
   )
 }

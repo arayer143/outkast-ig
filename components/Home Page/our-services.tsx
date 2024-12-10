@@ -12,7 +12,7 @@ const services = [
     title: "Above Ground Storage Tank Cleaning",
     description: "We offer turnkey solutions whether the tank requires to be cleaned for maintenance, API inspection, or product change.",
     image: "/container-cleaning-2.webp",
-    link: "/storage-tank-cleaning"
+    link: "/services/storage-tank-cleaning"
   },
   {
     title: "Complete System Turnkey Cleaning",
@@ -24,13 +24,13 @@ const services = [
     title: "Pipeline Systems Cleaning",
     description: "From a complex multi-system cleaning to a simple pump pad Outkast can return your pipes clean and ready for its next service.",
     image: "/outkast-banner.webp",
-    link: "/pipeline-system-cleaning"
+    link: "/services/pipeline-system-cleaning"
   },
   {
-    title: "Chemical Cleaning",
+    title: "Hazardous Material Cleaning",
     description: "We use specialized chemicals, equipment, and techniques to maintain cleanliness and sanitation in industrial facilities.",
     image: "/hazmat.webp",
-    link: "/chemical-cleaning"
+    link: "/services/hazardous-material-cleaning"
   }
 ]
 

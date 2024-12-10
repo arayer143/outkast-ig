@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
-import { Navbar } from '@/components/navbar'
+import { Navbar } from '@/components/Navbar'
 import { ApplicationForm } from '@/components/application-form'
-import { Footer } from '@/components/footer'
+import { Footer } from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Apply to Join Our Team | Outkastig',

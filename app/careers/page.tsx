@@ -1,13 +1,15 @@
 import { Metadata } from 'next'
 
 import { ApplicationForm } from '@/components/application-form'
+
+import { CTASection } from '@/components/cta-section'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 
 
 export const metadata: Metadata = {
-  title: 'Apply to Join Our Team | Outkastig',
-  description: 'Join our team of industrial cleaning and safety specialists. Apply now for exciting career opportunities.',
+  title: 'About Us | Outkastig',
+  description: 'Learn more about our company goals and values.',
 }
 
 export default function ApplyPage() {
@@ -18,6 +20,7 @@ export default function ApplyPage() {
         <section className="container mx-auto px-4 py-16">
 
           <ApplicationForm />
+          <CTASection />
         </section>
       </main>
       <Footer />

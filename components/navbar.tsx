@@ -48,7 +48,7 @@ export function Navbar() {
       <div className="container grid grid-cols-3 h-16 items-center">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/outkast-logo.webp" alt="OutKast Industrial Group Logo" width={70} height={60} className="h-8 w-auto rounded-full" />
+            <Image src="/outkast-logo.webp" alt="OutKast Industrial Group Logo" width={120} height={100} className="h-8 w-auto rounded-full" />
             <span className="hidden font-bold text-lg sm:inline-block">
               OutKast Industrial Group
             </span>

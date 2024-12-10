@@ -7,8 +7,8 @@ import { CertificationSection } from "@/components/Home Page/certifications"
 import { CTASection } from "@/components/cta-section"
 import { WhyChooseUsSection } from "@/components/Home Page/why-choose-us"
 import { ContactSection } from "@/components/contact-form"
-import { Navbar } from "@/components/Navbar"
-import { Footer } from "@/components/Footer"
+import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
 
 
 export default function Home() {

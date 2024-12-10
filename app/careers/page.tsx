@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 import { ApplicationForm } from '@/components/application-form'
 
 import { CTASection } from '@/components/cta-section'
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
+import { Navbar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
 
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 import { ContactSection } from '@/components/contact-form'
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
+import { Navbar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

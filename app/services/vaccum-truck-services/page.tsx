@@ -1,5 +1,5 @@
-import { Navbar as Navbar } from '@/components/Navbar'
-import { Footer as Footer } from '@/components/Footer'
+import { Navbar as Navbar } from '@/components/navbar'
+import { Footer as Footer } from '@/components/footer'
 import { Banner } from '@/components/Services Pages/banner'
 import { Metadata } from 'next'
 

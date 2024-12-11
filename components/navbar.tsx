@@ -37,6 +37,7 @@ const navigationItems = [
     ],
   },
   { title: "Careers", href: "/careers" },
+  { title: "Employees", href: "/employees" },
   { title: "Contact", href: "/contact" },
 ]
 

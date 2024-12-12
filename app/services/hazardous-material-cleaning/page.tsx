@@ -2,6 +2,7 @@ import { Navbar as Navbar } from '@/components/navbar'
 import { Footer as Footer } from '@/components/footer'
 import { Banner } from '@/components/Services Pages/banner'
 import { Metadata } from 'next'
+import HazardousMaterialCleaning from '@/components/Services Pages/hazardous-materials-cleaning'
 
 export const metadata: Metadata = {
   title: 'Outkast Service | Outkast Industrial Group',
@@ -17,7 +18,7 @@ export default function OutkastServicePage() {
         imageSrc="/outkast-banner.webp"
       />
       <main className="container mx-auto px-4 py-8">
-        {/* Main content area is now blank for you to import your information */}
+   <HazardousMaterialCleaning />
       </main>
       <Footer />
     </>

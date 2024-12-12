@@ -2,6 +2,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Banner } from '@/components/Services Pages/banner'
 import { Metadata } from 'next'
+import AllServicesPage from '@/components/Services Pages/all-services'
 
 export const metadata: Metadata = {
   // Metadata for the specific Outkast service page
@@ -22,7 +23,7 @@ export default function OutkastServicePage() {
 
       <main className="container mx-auto px-4 py-8">
 
-        {/* Add more detailed information about the Outkast service here */}
+   <AllServicesPage />
       </main>
       <Footer />
     </>

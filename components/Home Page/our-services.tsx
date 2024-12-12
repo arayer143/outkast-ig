@@ -81,9 +81,8 @@ function ServiceCard({ service, index }: { service: typeof services[0], index: n
           <Image
             src={service.image}
             alt={service.title}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-t-lg transition-transform duration-300 group-hover:scale-110"
+            fill
+            className="rounded-t-lg object-cover transition-transform duration-300 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>

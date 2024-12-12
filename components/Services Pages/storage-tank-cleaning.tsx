@@ -11,7 +11,7 @@ export default function StorageTankCleaning() {
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <AspectRatio ratio={16 / 9} className="bg-muted">
             <Image
-              src="/assets/img/Pressure_Washing_of_Tank_Exterior.webp"
+              src="/Pressure_Washing_of_Tank_Exterior.webp"
               alt="Pressure Washing of Tank Exterior"
               fill
               className="rounded-md object-cover"

@@ -1,10 +1,11 @@
 import { Metadata } from 'next'
 
-import { ApplicationForm } from '@/components/application-form'
+import { ApplicationForm } from '@/components/Careers Page/application-form'
 
 import { CTASection } from '@/components/cta-section'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import CareersPage from '@/components/Careers Page/careers-page'
 
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function ApplyPage() {
       <Navbar />
       <main className="flex-1">
         <section className="container mx-auto px-4 py-16">
-
+<CareersPage />
           <ApplicationForm />
           <CTASection />
         </section>

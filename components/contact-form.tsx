@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Loader2, Mail, Phone, MapPin, ExternalLink } from 'lucide-react'
+import { Loader2, Mail, Phone, Facebook, Linkedin } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const services = [
@@ -143,18 +143,7 @@ export function ContactSection() {
                 <CardDescription>Get in touch with us directly</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center space-x-2">
-                  <Mail className="text-primary" />
-                  <span>info@outkastig.com</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="text-primary" />
-                  <span>(225) 278-8330</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <MapPin className="text-primary" />
-                  <span>123 Industrial Way, Baton Rouge, LA 70123</span>
-                </div>
+               
                 <div className="flex space-x-4 mt-6">
                   <Button asChild className="flex-1">
                     <a href="tel:2252788330">
@@ -167,22 +156,15 @@ export function ContactSection() {
                     </a>
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Follow Us</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 mt-6">
                   <Button asChild variant="outline" size="icon">
                     <a href="https://facebook.com/outkastig" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                      <ExternalLink className="h-4 w-4" />
+                      <Facebook className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button asChild variant="outline" size="icon">
                     <a href="https://linkedin.com/company/outkastig" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                      <ExternalLink className="h-4 w-4" />
+                      <Linkedin className="h-4 w-4" />
                     </a>
                   </Button>
                 </div>
@@ -194,4 +176,3 @@ export function ContactSection() {
     </section>
   )
 }
-

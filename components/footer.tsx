@@ -71,10 +71,10 @@ export function Footer() {
             <div className="mt-6 flex flex-col items-center space-y-4">
               <div className="flex space-x-4">
                 <ContactButton href="tel:2252788330" icon={Phone}>
-                  (225) 278-8330
+                  Call Us
                 </ContactButton>
                 <ContactButton href="mailto:cory_reis@outkastig.com" icon={Mail}>
-                  cory_reis@outkastig.com
+                  Email Us
                 </ContactButton>
               </div>
               <div className="flex justify-center space-x-4">

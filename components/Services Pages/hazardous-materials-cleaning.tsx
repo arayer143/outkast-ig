@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import Link from 'next/link'
-import { AlertTriangle, CheckCircle, FlaskRoundIcon as Flask, Sun } from 'lucide-react'
+import { AlertTriangle, CheckCircle, Sun, CheckIcon, Pill, ShellIcon as OilCanIcon, Cpu, Car, Plane, Microscope, Stethoscope, LucideBiohazard } from 'lucide-react'
 
 export default function HazardousMaterialCleaning() {
   return (
@@ -11,7 +11,7 @@ export default function HazardousMaterialCleaning() {
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <AspectRatio ratio={16 / 9} className="bg-muted">
             <Image
-              src="/Response_to_Leaking_Railcar_Valve.webp"
+              src="/assets/img/Response_to_Leaking_Railcar_Valve.webp"
               alt="Response to Leaking Railcar Valve"
               fill
               className="rounded-md object-cover"
@@ -57,7 +57,7 @@ export default function HazardousMaterialCleaning() {
           <Card className="bg-white dark:bg-gray-800">
             <CardHeader>
               <CardTitle className="flex items-center text-gray-800 dark:text-gray-100">
-                <Flask className="w-6 h-6 mr-2 text-blue-500 dark:text-blue-400" />
+                <LucideBiohazard className="w-6 h-6 mr-2 text-blue-500 dark:text-blue-400" />
                 Chemical Handling
               </CardTitle>
             </CardHeader>
@@ -82,27 +82,72 @@ export default function HazardousMaterialCleaning() {
             </CardContent>
           </Card>
         </div>
-        
-        <div className="mt-12">
-          <h3 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Why Choose Our Hazardous Material Cleaning Services?</h3>
-          <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+
+        <div className="mt-16 text-center">
+          <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Our Process</h3>
+          <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <ol className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-300 text-left">
+              <li>Initial hazard assessment</li>
+              <li>Development of a tailored handling plan</li>
+              <li>Implementation of safety protocols</li>
+              <li>Secure containment and packaging</li>
+              <li>Safe transportation to disposal facility</li>
+              <li>Proper disposal or treatment</li>
+              <li>Decontamination of affected areas</li>
+              <li>Comprehensive documentation and reporting</li>
+            </ol>
+          </div>
+        </div>
+
+        <div className="mt-16">
+          <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800 dark:text-gray-100">Industries Served</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              "Experienced and certified hazardous materials specialists",
-              "State-of-the-art equipment and technologies",
-              "Strict adherence to safety protocols and regulations",
-              "24/7 emergency response capabilities",
-              "Comprehensive documentation and reporting",
-              "Environmentally responsible disposal methods"
-            ].map((item, index) => (
-              <li key={index} className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                {item}
-              </li>
+              { name: "Chemical Manufacturing", icon: <LucideBiohazard className="w-8 h-8" /> },
+              { name: "Pharmaceuticals", icon: <Pill className="w-8 h-8" /> },
+              { name: "Oil and Gas", icon: <OilCanIcon className="w-8 h-8" /> },
+              { name: "Electronics", icon: <Cpu className="w-8 h-8" /> },
+              { name: "Automotive", icon: <Car className="w-8 h-8" /> },
+              { name: "Aerospace", icon: <Plane className="w-8 h-8" /> },
+              { name: "Research Facilities", icon: <Microscope className="w-8 h-8" /> },
+              { name: "Healthcare", icon: <Stethoscope className="w-8 h-8" /> }
+            ].map((industry, index) => (
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                <div className="text-blue-500 dark:text-blue-400 mb-2">{industry.icon}</div>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">{industry.name}</p>
+              </div>
             ))}
-          </ul>
+          </div>
+        </div>
+
+        <div className="mt-16 flex justify-center">
+          <Card className="bg-white dark:bg-gray-800 max-w-3xl w-full">
+            <CardHeader>
+              <CardTitle className="text-2xl font-semibold text-center text-gray-800 dark:text-gray-100">
+                Why Choose Our Hazardous Material Cleaning Services?
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
+                {[
+                  "Experienced and certified hazardous materials specialists",
+                  "State-of-the-art equipment and technologies",
+                  "Strict adherence to safety protocols and regulations",
+                  "24/7 emergency response capabilities",
+                  "Comprehensive documentation and reporting",
+                  "Environmentally responsible disposal methods"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-center">
+                    <CheckIcon className="w-5 h-5 mr-2 text-green-500 dark:text-green-400" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
         </div>
         
-        <div className="mt-12 text-center">
+        <div className="mt-16 text-center">
           <h3 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Need Expert Hazardous Material Handling?</h3>
           <p className="text-gray-600 dark:text-gray-300 mb-6">Contact us today to discuss your hazardous material cleaning and disposal needs. Our team of experts is ready to provide you with safe, compliant, and efficient solutions.</p>
           <Link href="/contact" passHref>
@@ -115,3 +160,4 @@ export default function HazardousMaterialCleaning() {
     </section>
   )
 }
+

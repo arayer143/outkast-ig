@@ -24,7 +24,7 @@ const features = [
 
 export default function CareersPage() {
   return (
-    <main className="flex flex-col items-center bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <main className="flex flex-col py-5 items-center bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <section className="w-full bg-gray-900 dark:bg-black">
         <Carousel className="w-full max-w-5xl mx-auto">
           <CarouselContent>

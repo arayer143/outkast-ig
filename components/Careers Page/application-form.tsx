@@ -73,7 +73,7 @@ export function ApplicationForm() {
   }
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full p-5 max-w-2xl mx-auto">
       <CardHeader>
         <CardTitle>Apply to Join Our Team</CardTitle>
         <CardDescription>Fill out the form below to submit your application. We&apos;ll review it and get back to you soon.</CardDescription>

@@ -1,6 +1,7 @@
 import * as React from "react"
 import Link from "next/link"
-import { Facebook, Linkedin, Mail, Phone } from 'lucide-react'
+import { Facebook, Linkedin, Mail, Phone, ExternalLink } from 'lucide-react'
+import Image from 'next/image'
 
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
@@ -28,15 +29,41 @@ function SocialButton({ href, icon: Icon, label }: { href: string; icon: React.E
   )
 }
 
+const navigationItems = [
+  { title: "Home", href: "/" },
+  { title: "About", href: "/about" },
+  {
+    title: "Services",
+    content: [
+      { title: "All Services", href: "/services" },
+      { title: "Storage Tank Cleaning", href: "/services/storage-tank-cleaning" },
+      { title: "Pipeline System Cleaning", href: "/services/pipeline-system-cleaning" },
+      { title: "Vaccum Truck Services", href: "/services/vaccum-truck-services" },
+      { title: "Chemical Cleaning", href: "/services/chemical-cleaning" },
+      { title: "Hazardous Material Cleaning", href: "/services/hazardous-material-cleaning" },
+      { title: "Confined Space Rescue", href: "/services/confined-space-rescue" },
+    ],
+  },
+  { title: "Careers", href: "/careers" },
+  { title: "Employees", href: "/employees" },
+  { title: "Contact", href: "/contact" },
+]
+
 export function Footer() {
   return (
     <footer className="bg-background">
       <div className="container px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 text-center">
           <div>
-            <div className="flex items-center justify-center">
-              <OutKastLogo />
-              <span className="ml-2 text-xl font-bold">OutKast Industrial Group</span>
+            <div className="flex flex-col items-center justify-center">
+              <Image
+                src="/outkast-logo.webp"
+                alt="OutKast Industrial Group Logo"
+                width={100}
+                height={100}
+                className="mb-2 rounded-full"
+              />
+              <span className="text-xl font-bold">OutKast Industrial Group</span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
               Innovative industrial solutions for a changing world.
@@ -44,10 +71,10 @@ export function Footer() {
             <div className="mt-6 flex flex-col items-center space-y-4">
               <div className="flex space-x-4">
                 <ContactButton href="tel:2252788330" icon={Phone}>
-                  Call Us
+                  (225) 278-8330
                 </ContactButton>
                 <ContactButton href="mailto:cory_reis@outkastig.com" icon={Mail}>
-                  Email Us
+                  cory_reis@outkastig.com
                 </ContactButton>
               </div>
               <div className="flex justify-center space-x-4">
@@ -58,71 +85,49 @@ export function Footer() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 lg:col-span-2 text-center">
-            <div>
-              <h3 className="text-sm font-semibold">Company</h3>
-              <FooterLinks
-                links={[
-                  { href: "/about", label: "About" },
-                  { href: "/team", label: "Our Team" },
-                  { href: "/careers", label: "Careers" },
-                  { href: "/contact", label: "Contact" },
-                ]}
-              />
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold">Services</h3>
-              <FooterLinks
-                links={[
-                  { href: "/services/manufacturing", label: "Manufacturing" },
-                  { href: "/services/engineering", label: "Engineering" },
-                  { href: "/services/consulting", label: "Consulting" },
-                  { href: "/services/maintenance", label: "Maintenance" },
-                ]}
-              />
-            </div>
+          <div>
+            <h3 className="text-sm font-semibold mb-4">Quick Links</h3>
+            <FooterLinks
+              links={navigationItems.filter(item => !item.content)}
+            />
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold mb-4">Services</h3>
+            <FooterLinks
+              links={navigationItems.find(item => item.title === "Services")?.content || []}
+            />
           </div>
         </div>
         <Separator className="my-8" />
-        <div className="text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} OutKast Industrial Group. All rights reserved.
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <div className="text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} OutKast Industrial Group. All rights reserved.
+          </div>
+          <Button variant="outline" asChild className="flex items-center gap-2">
+            <a href="https://www.raydunnsolutions.com/" target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="h-4 w-4" />
+              Website by Ray Dunn Solutions
+            </a>
+          </Button>
         </div>
       </div>
     </footer>
   )
 }
 
-function FooterLinks({ links }: { links: Array<{ href: string; label: string }> }) {
+function FooterLinks({ links }: { links: Array<{ href: string; title: string }> }) {
   return (
-    <ul className="mt-4 space-y-2 flex flex-col items-center">
+    <ul className="space-y-2 flex flex-col items-center">
       {links.map((link) => (
         <li key={link.href}>
           <Link
             href={link.href}
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            {link.label}
+            {link.title}
           </Link>
         </li>
       ))}
     </ul>
   )
 }
-
-function OutKastLogo() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-8 w-8"
-    >
-      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-    </svg>
-  )
-}
-

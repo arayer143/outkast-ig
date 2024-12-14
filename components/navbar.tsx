@@ -133,28 +133,24 @@ function MobileNav() {
 
   return (
     <div className="flex flex-col space-y-4 p-4">
-      <Link href="/" className="mb-4 flex items-center space-x-2">
-        <Image src="/logo.png" alt="OutKast Industrial Group Logo" width={40} height={40} className="h-8 w-auto rounded-md" />
-        <span className="font-bold text-lg">OutKast Industrial Group</span>
-      </Link>
       {navigationItems.map((item) => (
         <React.Fragment key={item.title}>
           {item.content ? (
             <>
               <button
                 onClick={() => setShowServices(!showServices)}
-                className="flex items-center justify-between w-full text-left font-medium text-base"
+                className="flex items-center justify-between w-full text-left font-medium text-base py-2 px-4 rounded-md hover:bg-accent"
               >
                 {item.title}
                 <ChevronDown className={`h-4 w-4 transition-transform ${showServices ? 'rotate-180' : ''}`} />
               </button>
               {showServices && (
-                <div className="pl-4 space-y-2">
+                <div className="pl-4 space-y-2 mt-2">
                   {item.content.map((subItem) => (
                     <Link
                       key={subItem.title}
                       href={subItem.href}
-                      className="block text-base text-muted-foreground hover:text-foreground"
+                      className="block text-sm py-2 px-4 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
                     >
                       {subItem.title}
                     </Link>
@@ -165,7 +161,7 @@ function MobileNav() {
           ) : (
             <Link
               href={item.href}
-              className="text-base font-medium text-foreground/70 transition-colors hover:text-foreground"
+              className="block text-base font-medium py-2 px-4 rounded-md text-foreground/70 hover:text-foreground hover:bg-accent transition-colors"
             >
               {item.title}
             </Link>

@@ -151,7 +151,7 @@ export function ContactSection() {
                     </a>
                   </Button>
                   <Button asChild variant="outline" className="flex-1">
-                    <a href="mailto:info@outkastig.com">
+                    <a href="mailto:services@outkastig.comv">
                       <Mail className="mr-2 h-4 w-4" /> Email Us
                     </a>
                   </Button>

@@ -73,14 +73,14 @@ export function Footer() {
                 <ContactButton href="tel:2252788330" icon={Phone}>
                   Call Us
                 </ContactButton>
-                <ContactButton href="mailto:cory_reis@outkastig.com" icon={Mail}>
+                <ContactButton href="mailto:services@outkastig.com" icon={Mail}>
                   Email Us
                 </ContactButton>
               </div>
               <div className="flex justify-center space-x-4">
                 <SocialButton href="https://www.facebook.com/outkastig/" icon={Facebook} label="Facebook" />
                 <SocialButton href="https://www.linkedin.com/company/outkastig/" icon={Linkedin} label="LinkedIn" />
-                <SocialButton href="mailto:cory_reis@outkastig.com" icon={Mail} label="Email" />
+                <SocialButton href="mailto:services@outkastig.com" icon={Mail} label="Email" />
                 <SocialButton href="tel:2252788330" icon={Phone} label="Phone" />
               </div>
             </div>

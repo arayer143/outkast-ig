@@ -91,7 +91,7 @@ export default function AboutPage() {
                     </Link>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <Link href="mailto:cory_reis@outkastig.com" aria-label="Send email to Outkast Industrial Group">
+                    <Link href="mailto:services@outkastig.com" aria-label="Send email to Outkast Industrial Group">
                       <Mail className="h-5 w-5" />
                     </Link>
                   </Button>

@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { BiohazardIcon, CheckCircleIcon, DropletIcon, AlertTriangleIcon, CheckIcon, BuildingIcon, FactoryIcon, TruckIcon, ShellIcon as OilCanIcon, FlaskConicalIcon, LeafIcon, ConstructionIcon, WrenchIcon } from 'lucide-react'
+import { BiohazardIcon, DropletIcon, AlertTriangleIcon, CheckIcon, FactoryIcon, ShellIcon as OilCanIcon, FlaskConicalIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export default function VacuumTruckServices() {
@@ -32,11 +32,8 @@ export default function VacuumTruckServices() {
               title: "Liquid Waste Removal",
               description: "Our vacuum trucks are capable of efficiently removing various types of liquid waste, including hazardous and non-hazardous liquids, sludge, and slurry. We ensure proper disposal according to environmental regulations."
             },
-            {
-              icon: <CheckCircleIcon className="w-6 h-6" />,
-              title: "Septic and Grease Trap Cleaning",
-              description: "We provide thorough cleaning and maintenance of septic systems and grease traps, preventing blockages and ensuring optimal performance of your waste management systems."
-            },
+            
+    
             {
               icon: <DropletIcon className="w-6 h-6" />,
               title: "Industrial Cleaning",
@@ -83,14 +80,7 @@ export default function VacuumTruckServices() {
             {[
               { name: "Oil and Gas", icon: <OilCanIcon className="w-8 h-8" /> },
               { name: "Chemical Manufacturing", icon: <FlaskConicalIcon className="w-8 h-8" /> },
-              { name: "Construction", icon: <ConstructionIcon className="w-8 h-8" /> },
-              { name: "Food Processing", icon: <LeafIcon className="w-8 h-8" /> },
-              { name: "Municipalities", icon: <BuildingIcon className="w-8 h-8" /> },
-              { name: "Wastewater Treatment", icon: <DropletIcon className="w-8 h-8" /> },
-              { name: "Agriculture", icon: <LeafIcon className="w-8 h-8" /> },
-              { name: "Transportation", icon: <TruckIcon className="w-8 h-8" /> },
-              { name: "Mining", icon: <WrenchIcon className="w-8 h-8" /> },
-              { name: "Manufacturing", icon: <FactoryIcon className="w-8 h-8" /> }
+              { name: "Manufacturing", icon: <FactoryIcon className="w-8 h-8" /> },
             ].map((industry, index) => (
               <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
                 <div className="text-blue-500 dark:text-blue-400 mb-2">{industry.icon}</div>

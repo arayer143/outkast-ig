@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import Link from 'next/link'
-import { AlertTriangle, CheckCircle, Sun, CheckIcon, Pill, ShellIcon as OilCanIcon, Cpu, Car, Plane, Microscope, Stethoscope, LucideBiohazard } from 'lucide-react'
+import { AlertTriangle, CheckCircle, Sun, CheckIcon, ShellIcon as OilCanIcon, LucideBiohazard } from 'lucide-react'
 
 export default function HazardousMaterialCleaning() {
   return (
@@ -104,13 +104,9 @@ export default function HazardousMaterialCleaning() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
               { name: "Chemical Manufacturing", icon: <LucideBiohazard className="w-8 h-8" /> },
-              { name: "Pharmaceuticals", icon: <Pill className="w-8 h-8" /> },
               { name: "Oil and Gas", icon: <OilCanIcon className="w-8 h-8" /> },
-              { name: "Electronics", icon: <Cpu className="w-8 h-8" /> },
-              { name: "Automotive", icon: <Car className="w-8 h-8" /> },
-              { name: "Aerospace", icon: <Plane className="w-8 h-8" /> },
-              { name: "Research Facilities", icon: <Microscope className="w-8 h-8" /> },
-              { name: "Healthcare", icon: <Stethoscope className="w-8 h-8" /> }
+             
+
             ].map((industry, index) => (
               <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
                 <div className="text-blue-500 dark:text-blue-400 mb-2">{industry.icon}</div>

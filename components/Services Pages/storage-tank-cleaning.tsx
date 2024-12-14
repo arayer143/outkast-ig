@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { CheckIcon, DropletIcon, ShieldIcon, SearchIcon, ShellIcon as OilCanIcon, FlaskConicalIcon, LeafIcon, FactoryIcon, BuildingIcon } from 'lucide-react'
+import { CheckIcon, DropletIcon, ShieldIcon, SearchIcon, ShellIcon as OilCanIcon, FlaskConicalIcon, FactoryIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export default function StorageTankCleaning() {
@@ -84,12 +84,7 @@ export default function StorageTankCleaning() {
             {[
               { name: "Oil and Gas", icon: <OilCanIcon className="w-8 h-8" /> },
               { name: "Chemical Manufacturing", icon: <FlaskConicalIcon className="w-8 h-8" /> },
-              { name: "Food and Beverage", icon: <LeafIcon className="w-8 h-8" /> },
-              { name: "Pharmaceuticals", icon: <FlaskConicalIcon className="w-8 h-8" /> },
-              { name: "Water Treatment", icon: <DropletIcon className="w-8 h-8" /> },
-              { name: "Agriculture", icon: <LeafIcon className="w-8 h-8" /> },
               { name: "Manufacturing", icon: <FactoryIcon className="w-8 h-8" /> },
-              { name: "Municipalities", icon: <BuildingIcon className="w-8 h-8" /> }
             ].map((industry, index) => (
               <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
                 <div className="text-blue-500 dark:text-blue-400 mb-2">{industry.icon}</div>

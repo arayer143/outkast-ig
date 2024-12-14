@@ -2,16 +2,11 @@
 
 import * as React from "react"
 import Link from "next/link"
-import Image from "next/image";
-import { ChevronDown, Menu, Moon, Sun } from 'lucide-react'
+import Image from "next/image"
+import { ChevronDown, Menu, Moon, Sun, X } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 import { Button } from "@/components/ui/button"
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -43,6 +38,8 @@ const navigationItems = [
 
 export function Navbar() {
   const { theme, setTheme } = useTheme()
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [showServices, setShowServices] = React.useState(false)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -107,67 +104,62 @@ export function Navbar() {
             <span className="sr-only">Toggle theme</span>
           </Button>
           
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="md:hidden"
-              >
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="pr-0">
-              <MobileNav />
-            </SheetContent>
-          </Sheet>
+          <Button
+            variant="outline"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <span className="sr-only">Toggle Menu</span>
+          </Button>
         </div>
       </div>
-    </header>
-  )
-}
 
-function MobileNav() {
-  const [showServices, setShowServices] = React.useState(false)
-
-  return (
-    <div className="flex flex-col space-y-4 p-4">
-      {navigationItems.map((item) => (
-        <React.Fragment key={item.title}>
-          {item.content ? (
-            <>
-              <button
-                onClick={() => setShowServices(!showServices)}
-                className="flex items-center justify-between w-full text-left font-medium text-base py-2 px-4 rounded-md hover:bg-accent"
-              >
-                {item.title}
-                <ChevronDown className={`h-4 w-4 transition-transform ${showServices ? 'rotate-180' : ''}`} />
-              </button>
-              {showServices && (
-                <div className="pl-4 space-y-2 mt-2">
-                  {item.content.map((subItem) => (
-                    <Link
-                      key={subItem.title}
-                      href={subItem.href}
-                      className="block text-sm py-2 px-4 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden">
+          <nav className="flex flex-col space-y-4 p-4">
+            {navigationItems.map((item) => (
+              <React.Fragment key={item.title}>
+                {item.content ? (
+                  <>
+                    <button
+                      onClick={() => setShowServices(!showServices)}
+                      className="flex items-center justify-between w-full text-left font-medium text-base py-2 px-4 rounded-md hover:bg-accent"
                     >
-                      {subItem.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </>
-          ) : (
-            <Link
-              href={item.href}
-              className="block text-base font-medium py-2 px-4 rounded-md text-foreground/70 hover:text-foreground hover:bg-accent transition-colors"
-            >
-              {item.title}
-            </Link>
-          )}
-        </React.Fragment>
-      ))}
-    </div>
+                      {item.title}
+                      <ChevronDown className={`h-4 w-4 transition-transform ${showServices ? 'rotate-180' : ''}`} />
+                    </button>
+                    {showServices && (
+                      <div className="pl-4 space-y-2 mt-2">
+                        {item.content.map((subItem) => (
+                          <Link
+                            key={subItem.title}
+                            href={subItem.href}
+                            className="block text-sm py-2 px-4 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {subItem.title}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="block text-base font-medium py-2 px-4 rounded-md text-foreground/70 hover:text-foreground hover:bg-accent transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.title}
+                  </Link>
+                )}
+              </React.Fragment>
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
   )
 }

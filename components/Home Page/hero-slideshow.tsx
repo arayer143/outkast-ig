@@ -43,12 +43,7 @@ export function HeroSlideshow() {
             style={{ objectFit: "cover" }}
             priority={index === 0}
           />
-          <div className="absolute inset-0 bg-black bg-opacity-40" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center">{image.title}</h2>
-            <p className="text-xl md:text-2xl lg:text-3xl mb-8 text-center">{image.description}</p>
-            <Button size="lg">Learn More</Button>
-          </div>
+       
         </div>
       ))}
       <Button

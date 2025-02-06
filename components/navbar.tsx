@@ -3,8 +3,8 @@
 import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ChevronDown, Menu, Moon, Sun, X } from 'lucide-react'
-import { useTheme } from 'next-themes'
+import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react"
+import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -43,67 +43,67 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container grid grid-cols-3 h-16 items-center">
+      <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/outkast-logo.webp" alt="OutKast Industrial Group Logo" width={120} height={100} className="h-8 w-auto rounded-full" />
-            <span className="hidden font-bold text-lg sm:inline-block">
-              OutKast Industrial Group
-            </span>
+            <Image
+              src="/outkast-logo.webp"
+              alt="OutKast Industrial Group Logo"
+              width={120}
+              height={100}
+              className="h-8 w-auto rounded-full"
+            />
+            <span className="hidden font-bold text-lg lg:inline-block">OutKast Industrial Group</span>
           </Link>
         </div>
-        
-        <div className="flex justify-center">
-          <NavigationMenu className="hidden md:flex">
-            <NavigationMenuList className="space-x-6">
-              {navigationItems.map((item) => (
-                <NavigationMenuItem key={item.title}>
-                  {item.content ? (
-                    <>
-                      <NavigationMenuTrigger className="text-base font-medium">{item.title}</NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px]">
-                          {item.content.map((subItem) => (
-                            <li key={subItem.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={subItem.href}
-                                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                >
-                                  <div className="text-sm font-medium leading-none">{subItem.title}</div>
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <Link href={item.href} legacyBehavior passHref>
-                      <NavigationMenuLink className="text-base font-medium">
-                        {item.title}
-                      </NavigationMenuLink>
-                    </Link>
-                  )}
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
-        
-        <div className="flex justify-end items-center space-x-4">
+
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList className="space-x-6">
+            {navigationItems.map((item) => (
+              <NavigationMenuItem key={item.title}>
+                {item.content ? (
+                  <>
+                    <NavigationMenuTrigger className="text-base font-medium">{item.title}</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px]">
+                        {item.content.map((subItem) => (
+                          <li key={subItem.title}>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                href={subItem.href}
+                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              >
+                                <div className="text-sm font-medium leading-none">{subItem.title}</div>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </>
+                ) : (
+                  <Link href={item.href} legacyBehavior passHref>
+                    <NavigationMenuLink className="text-base font-medium">{item.title}</NavigationMenuLink>
+                  </Link>
+                )}
+              </NavigationMenuItem>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
+
+        <div className="flex items-center space-x-4">
           <Button
             variant="ghost"
             size="icon"
             aria-label="Toggle theme"
             className="mr-6"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
             <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
-          
+
           <Button
             variant="outline"
             size="icon"
@@ -129,7 +129,7 @@ export function Navbar() {
                       className="flex items-center justify-between w-full text-left font-medium text-base py-2 px-4 rounded-md hover:bg-accent"
                     >
                       {item.title}
-                      <ChevronDown className={`h-4 w-4 transition-transform ${showServices ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`h-4 w-4 transition-transform ${showServices ? "rotate-180" : ""}`} />
                     </button>
                     {showServices && (
                       <div className="pl-4 space-y-2 mt-2">
@@ -163,3 +163,4 @@ export function Navbar() {
     </header>
   )
 }
+

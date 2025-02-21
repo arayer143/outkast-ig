@@ -1,13 +1,15 @@
-'use client'
+"use client"
 
-import { useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import type React from "react"
+
+import { useState, useRef } from "react"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Loader2, Mail, Phone, Facebook, Linkedin } from 'lucide-react'
+import { Loader2, Mail, Phone, Facebook, Linkedin } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const services = [
@@ -20,26 +22,26 @@ const services = [
 ]
 
 const formatPhoneNumber = (value: string) => {
-  if (!value) return value;
-  const phoneNumber = value.replace(/[^\d]/g, '');
-  const phoneNumberLength = phoneNumber.length;
-  if (phoneNumberLength < 4) return phoneNumber;
+  if (!value) return value
+  const phoneNumber = value.replace(/[^\d]/g, "")
+  const phoneNumberLength = phoneNumber.length
+  if (phoneNumberLength < 4) return phoneNumber
   if (phoneNumberLength < 7) {
-    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`
   }
-  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
-};
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`
+}
 
 export function ContactSection() {
   const [isLoading, setIsLoading] = useState(false)
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("")
   const { toast } = useToast()
   const formRef = useRef<HTMLFormElement>(null)
 
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const formattedPhoneNumber = formatPhoneNumber(event.target.value);
-    setPhoneNumber(formattedPhoneNumber);
-  };
+    const formattedPhoneNumber = formatPhoneNumber(event.target.value)
+    setPhoneNumber(formattedPhoneNumber)
+  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -51,8 +53,8 @@ export function ContactSection() {
     const formData = new FormData(form)
 
     try {
-      const response = await fetch('/api/submit-contact', {
-        method: 'POST',
+      const response = await fetch("/api/submit-contact", {
+        method: "POST",
         body: formData,
       })
 
@@ -64,12 +66,12 @@ export function ContactSection() {
           description: "We'll get back to you as soon as possible.",
         })
         form.reset()
-        setPhoneNumber('')
+        setPhoneNumber("")
       } else {
-        throw new Error(result.error || 'Failed to send message')
+        throw new Error(result.error || "Failed to send message")
       }
-    } catch (error) {
-      console.error('Error sending message:', error)
+    } catch (error: unknown) {
+      console.error("Error sending message:", error)
       toast({
         title: "Something went wrong.",
         description: error instanceof Error ? error.message : "Please try again later.",
@@ -88,7 +90,10 @@ export function ContactSection() {
           <Card>
             <CardHeader>
               <CardTitle>Send us a message</CardTitle>
-              <CardDescription>We&apos;d love to hear from you. Fill out the form below and we&apos;ll get back to you as soon as possible.</CardDescription>
+              <CardDescription>
+                We&apos;d love to hear from you. Fill out the form below and we&apos;ll get back to you as soon as
+                possible.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <motion.form
@@ -130,7 +135,7 @@ export function ContactSection() {
                       Sending...
                     </>
                   ) : (
-                    'Send Message'
+                    "Send Message"
                   )}
                 </Button>
               </motion.form>
@@ -143,7 +148,6 @@ export function ContactSection() {
                 <CardDescription>Get in touch with us directly</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-               
                 <div className="flex space-x-4 mt-6">
                   <Button asChild className="flex-1">
                     <a href="tel:2252788330">
@@ -158,12 +162,22 @@ export function ContactSection() {
                 </div>
                 <div className="flex space-x-4 mt-6">
                   <Button asChild variant="outline" size="icon">
-                    <a href="https://facebook.com/outkastig" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <a
+                      href="https://facebook.com/outkastig"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Facebook"
+                    >
                       <Facebook className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button asChild variant="outline" size="icon">
-                    <a href="https://linkedin.com/company/outkastig" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <a
+                      href="https://linkedin.com/company/outkastig"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                    >
                       <Linkedin className="h-4 w-4" />
                     </a>
                   </Button>
@@ -176,3 +190,4 @@ export function ContactSection() {
     </section>
   )
 }
+

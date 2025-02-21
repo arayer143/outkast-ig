@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
-import { Readable } from 'stream'
+import { type NextRequest, NextResponse } from "next/server"
+import nodemailer from "nodemailer"
+import { Readable } from "stream"
 
 // Create a transporter using SMTP
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+  port: Number.parseInt(process.env.SMTP_PORT || "465"),
+  secure: process.env.SMTP_SECURE === "true",
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
@@ -14,19 +14,19 @@ const transporter = nodemailer.createTransport({
 })
 
 export async function POST(req: NextRequest) {
-  if (req.method !== 'POST') {
-    return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
+  if (req.method !== "POST") {
+    return NextResponse.json({ error: "Method not allowed" }, { status: 405 })
   }
 
   try {
     const formData = await req.formData()
-    const name = formData.get('name') as string
-    const email = formData.get('email') as string
-    const phone = formData.get('phone') as string
-    const position = formData.get('position') as string
-    const experience = formData.get('experience') as string
-    const message = formData.get('message') as string
-    const resume = formData.get('resume') as File
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const phone = formData.get("phone") as string
+    const position = formData.get("position") as string
+    const experience = formData.get("experience") as string
+    const message = formData.get("message") as string
+    const resume = formData.get("resume") as File
 
     const resumeBuffer = await resume.arrayBuffer()
     const resumeStream = new Readable()
@@ -65,9 +65,10 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail(mailOptions)
 
-    return NextResponse.json({ message: 'Application submitted successfully' }, { status: 200 })
+    return NextResponse.json({ message: "Application submitted successfully" }, { status: 200 })
   } catch (error) {
-    console.error('Error submitting application:', error)
-    return NextResponse.json({ error: 'Error submitting application' }, { status: 500 })
+    console.error("Error submitting application:", error)
+    return NextResponse.json({ error: "Error submitting application" }, { status: 500 })
   }
 }
+

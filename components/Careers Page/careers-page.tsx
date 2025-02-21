@@ -3,7 +3,8 @@ import Link from "next/link"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { CheckIcon } from 'lucide-react'
+import { CheckIcon } from "lucide-react"
+import { ApplicationForm } from "@/components/Careers Page/application-form"
 
 const carouselImages = [
   "/careers-page.webp",
@@ -32,7 +33,7 @@ export default function CareersPage() {
               <CarouselItem key={index}>
                 <div className="relative h-[60vh]">
                   <Image
-                    src={src}
+                    src={src || "/placeholder.svg"}
                     alt={`Careers image ${index + 1}`}
                     fill
                     className="object-cover"
@@ -52,11 +53,17 @@ export default function CareersPage() {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
             <p className="text-lg mb-6 dark:text-gray-300">
-              At OutKast Industrial Group, we are dedicated to providing a safe and informed crew to our job sites. We have no &quot;truck supervisors&quot; or &quot;just a vac truck driver&quot; here. If you&apos;re passionate about joining a team that puts safety first and truly works together to accomplish the goal then apply today!
+              At OutKast Industrial Group, we are dedicated to providing a safe and informed crew to our job sites. We
+              have no &quot;truck supervisors&quot; or &quot;just a vac truck driver&quot; here. If you&apos;re
+              passionate about joining a team that puts safety first and truly works together to accomplish the goal
+              then apply today!
             </p>
             <div className="text-center md:text-left">
               <Link href="tel:+11234567890">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600">
+                <Button
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
+                >
                   Contact Us Today
                   <span className="ml-2">→</span>
                 </Button>
@@ -64,12 +71,7 @@ export default function CareersPage() {
             </div>
           </div>
           <div className="relative h-[400px]">
-            <Image
-              src="/Manway.webp"
-              alt="Manway opening picture"
-              fill
-              className="object-cover rounded-lg"
-            />
+            <Image src="/Manway.webp" alt="Manway opening picture" fill className="object-cover rounded-lg" />
           </div>
         </div>
       </section>
@@ -79,12 +81,7 @@ export default function CareersPage() {
           <h2 className="text-3xl font-bold text-center mb-12 dark:text-gray-100">What we can offer</h2>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="relative h-[400px]">
-              <Image
-                src="/outkast-staff.webp"
-                alt="OutKast Staff Picture"
-                fill
-                className="object-cover rounded-lg"
-              />
+              <Image src="/outkast-staff.webp" alt="OutKast Staff Picture" fill className="object-cover rounded-lg" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {features.map((feature, index) => (
@@ -99,6 +96,12 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
+
+      <section className="w-full max-w-5xl mx-auto py-16 px-4">
+        <h2 className="text-3xl font-bold text-center mb-12 dark:text-gray-100">Apply Now</h2>
+        <ApplicationForm />
+      </section>
     </main>
   )
 }
+

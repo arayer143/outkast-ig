@@ -70,11 +70,11 @@ export function ContactSection() {
       } else {
         throw new Error(result.error || "Failed to send message")
       }
-    } catch (error: unknown) {
+    } catch (error) {
       console.error("Error sending message:", error)
       toast({
-        title: "Something went wrong.",
-        description: error instanceof Error ? error.message : "Please try again later.",
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to send message. Please try again later.",
         variant: "destructive",
       })
     } finally {

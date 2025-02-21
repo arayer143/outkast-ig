@@ -1,12 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 
-// Create a transporter using SMTP
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: process.env.SMTP_HOST,
+  port: Number.parseInt(process.env.SMTP_PORT || "465"),
+  secure: process.env.SMTP_SECURE === "true",
   auth: {
     user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    pass: process.env.SMTP_PASSWORD,
   },
 })
 
@@ -24,12 +25,14 @@ export async function POST(req: NextRequest) {
     const service = formData.get("service") as string
     const message = formData.get("message") as string
 
-    console.log("Form data received:", { name, email, phone, company, service })
+    if (!name || !email || !phone || !company || !service || !message) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    }
 
     const mailOptions = {
       from: process.env.SMTP_FROM_EMAIL,
-      to: process.env.APPLICATIONS_EMAIL,
-      subject: `New Contact Form Submission from outkastindustrial.com`,
+      to: process.env.CONTACT_EMAIL,
+      subject: `New Contact Form Submission from ${name}`,
       text: `
         Name: ${name}
         Email: ${email}
@@ -50,14 +53,12 @@ export async function POST(req: NextRequest) {
       `,
     }
 
-    console.log("Attempting to send email...")
     await transporter.sendMail(mailOptions)
-    console.log("Email sent successfully")
 
     return NextResponse.json({ message: "Message sent successfully" }, { status: 200 })
   } catch (error) {
     console.error("Error sending message:", error)
-    return NextResponse.json({ error: "Error sending message", details: error }, { status: 500 })
+    return NextResponse.json({ error: "Error sending message" }, { status: 500 })
   }
 }
 

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { ApplicationForm } from '@/components/Careers Page/application-form'
+
 
 import { CTASection } from '@/components/cta-section'
 import { Navbar } from '@/components/navbar'
@@ -20,7 +20,7 @@ export default function ApplyPage() {
       <main className="flex-1">
         <section className="container mx-auto px-4 py-16">
 <CareersPage />
-          <ApplicationForm />
+   
           <CTASection />
         </section>
       </main>

@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   secure: process.env.SMTP_SECURE === "true",
   auth: {
     user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    pass: process.env.SMTP_PASSWORD, // Changed from SMTP_PASS to SMTP_PASSWORD
   },
 })
 
@@ -27,6 +27,10 @@ export async function POST(req: NextRequest) {
     const experience = formData.get("experience") as string
     const message = formData.get("message") as string
     const resume = formData.get("resume") as File
+
+    if (!name || !email || !phone || !position || !experience || !message || !resume) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    }
 
     const resumeBuffer = await resume.arrayBuffer()
     const resumeStream = new Readable()

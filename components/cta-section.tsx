@@ -20,7 +20,7 @@ export function CTASection() {
               size="lg"
               variant="secondary"
               className="w-full sm:w-auto"
-              onClick={() => window.location.href = 'mailto:cory_reis@outkastig.com'}
+              onClick={() => window.location.href = 'mailto:services@outkastig.com'}
             >
               <Mail className="mr-2 h-5 w-5" /> Email Us
             </Button>

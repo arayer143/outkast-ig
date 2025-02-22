@@ -59,7 +59,7 @@ export default function CareersPage() {
               then apply today!
             </p>
             <div className="text-center md:text-left">
-              <Link href="tel:+11234567890">
+              <Link href="tel:2252788330">
                 <Button
                   size="lg"
                   className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"

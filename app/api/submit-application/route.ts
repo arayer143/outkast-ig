@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     const mailOptions = {
       from: process.env.SMTP_FROM_EMAIL,
       to: process.env.APPLICATIONS_EMAIL,
-      subject: `New Job Application from: ${name}`,
+      subject: `New Job Application from outkastindustrial.com`,
       text: `
         Name: ${name}
         Email: ${email}

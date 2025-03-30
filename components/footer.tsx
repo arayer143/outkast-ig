@@ -166,27 +166,44 @@ export function Footer() {
           <div className="text-sm text-foreground/60 dark:text-slate-400">
             © {new Date().getFullYear()} OutKast Industrial Group. All rights reserved.
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            asChild
-            className="group flex items-center gap-2 text-xs px-4 py-2 rounded-full border border-border/30 dark:border-slate-700/50 text-foreground/70 dark:text-slate-400 hover:border-primary/30 dark:hover:border-primary/30 hover:bg-white/80 dark:hover:bg-midnight-800/80 transition-all duration-300"
-          >
+          <div className="flex items-center space-x-4">
             <a
-              href="https://www.raydunnsolutions.com/"
+              href="https://jefferson.chambermaster.com/list/member/outkast-industrial-group-llc-13090"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center"
+              className="inline-block transform hover:scale-105 transition-transform duration-300"
+              aria-label="Jefferson Chamber of Commerce"
             >
-              <span className="mr-1.5">Website by</span>
-              <span className="font-semibold text-primary/40 dark:text-primary/100 group-hover:text-primary transition-colors">
-                RayDunn Solutions
-              </span>
-              <div className="ml-1.5 p-1 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                <ExternalLink className="h-3 w-3 text-primary" />
-              </div>
+              <div
+                className="h-16 w-auto bg-contain bg-no-repeat bg-center"
+                style={{
+                  backgroundImage: "url('/jefferson-chambers.webp')",
+                  minWidth: "180px",
+                }}
+              ></div>
             </a>
-          </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              asChild
+              className="group flex items-center gap-2 text-xs px-4 py-2 rounded-full border border-border/30 dark:border-slate-700/50 text-foreground/70 dark:text-slate-400 hover:border-primary/30 dark:hover:border-primary/30 hover:bg-white/80 dark:hover:bg-midnight-800/80 transition-all duration-300"
+            >
+              <a
+                href="https://www.raydunnsolutions.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
+                <span className="mr-1.5">Website by</span>
+                <span className="font-semibold text-primary/40 dark:text-primary/100 group-hover:text-primary transition-colors">
+                  RayDunn Solutions
+                </span>
+                <div className="ml-1.5 p-1 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <ExternalLink className="h-3 w-3 text-primary" />
+                </div>
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </footer>
@@ -210,4 +227,3 @@ function FooterLinks({ links }: { links: Array<{ href: string; title: string }> 
     </ul>
   )
 }
-

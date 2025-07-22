@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
 import nodemailer from "nodemailer"
-import { Readable } from "stream"
 
 // Create a transporter using SMTP
 const transporter = nodemailer.createTransport({
@@ -9,15 +8,11 @@ const transporter = nodemailer.createTransport({
   secure: process.env.SMTP_SECURE === "true",
   auth: {
     user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD, // Changed from SMTP_PASS to SMTP_PASSWORD
+    pass: process.env.SMTP_PASSWORD,
   },
 })
 
 export async function POST(req: NextRequest) {
-  if (req.method !== "POST") {
-    return NextResponse.json({ error: "Method not allowed" }, { status: 405 })
-  }
-
   try {
     const formData = await req.formData()
     const name = formData.get("name") as string
@@ -32,10 +27,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const resumeBuffer = await resume.arrayBuffer()
-    const resumeStream = new Readable()
-    resumeStream.push(Buffer.from(resumeBuffer))
-    resumeStream.push(null)
+    // Convert File to Buffer for nodemailer
+    const arrayBuffer = await resume.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
 
     const mailOptions = {
       from: process.env.SMTP_FROM_EMAIL,
@@ -62,17 +56,21 @@ export async function POST(req: NextRequest) {
       attachments: [
         {
           filename: resume.name,
-          content: resumeStream,
+          content: buffer,
         },
       ],
     }
 
     await transporter.sendMail(mailOptions)
-
     return NextResponse.json({ message: "Application submitted successfully" }, { status: 200 })
   } catch (error) {
     console.error("Error submitting application:", error)
-    return NextResponse.json({ error: "Error submitting application" }, { status: 500 })
+    return NextResponse.json(
+      {
+        error: "Error submitting application",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    )
   }
 }
-

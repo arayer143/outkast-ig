@@ -1,32 +1,35 @@
-'use client'
+"use client"
 
-import { useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import type React from "react"
+
+import { useState, useRef } from "react"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Loader2, Upload } from 'lucide-react'
+import { Loader2, Upload } from "lucide-react"
 
 export function ApplicationForm() {
   const [isLoading, setIsLoading] = useState(false)
-  const [fileName, setFileName] = useState('')
+  const [fileName, setFileName] = useState("")
   const { toast } = useToast()
   const formRef = useRef<HTMLFormElement>(null)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      if (file.size > 10 * 1024 * 1024) { // 10MB in bytes
+      if (file.size > 10 * 1024 * 1024) {
+        // 10MB in bytes
         toast({
           title: "File too large",
           description: "Please upload a file smaller than 10MB.",
           variant: "destructive",
         })
-        event.target.value = '' // Clear the file input
-        setFileName('')
+        event.target.value = "" // Clear the file input
+        setFileName("")
       } else {
         setFileName(file.name)
       }
@@ -37,14 +40,19 @@ export function ApplicationForm() {
     event.preventDefault()
     setIsLoading(true)
 
-    if (!formRef.current) return
-
-    const form = formRef.current
-    const formData = new FormData(form)
-
     try {
-      const response = await fetch('/api/submit-application', {
-        method: 'POST',
+      if (!formRef.current) return
+
+      const formData = new FormData(formRef.current)
+
+      // Log form data for debugging (remove in production)
+      console.log("Submitting form with data:")
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value instanceof File ? value.name : value}`)
+      }
+
+      const response = await fetch("/api/submit-application", {
+        method: "POST",
         body: formData,
       })
 
@@ -55,13 +63,13 @@ export function ApplicationForm() {
           title: "Application submitted successfully!",
           description: result.message || "We'll review your application and get back to you soon.",
         })
-        form.reset()
-        setFileName('')
+        formRef.current.reset()
+        setFileName("")
       } else {
-        throw new Error(result.error || 'Failed to send application')
+        throw new Error(result.error || "Failed to send application")
       }
     } catch (error) {
-      console.error('Error sending application:', error)
+      console.error("Error sending application:", error)
       toast({
         title: "Something went wrong.",
         description: error instanceof Error ? error.message : "Please try again later.",
@@ -76,7 +84,9 @@ export function ApplicationForm() {
     <Card className="w-full p-5 max-w-2xl mx-auto">
       <CardHeader>
         <CardTitle>Apply to Join Our Team</CardTitle>
-        <CardDescription>Fill out the form below to submit your application. We&apos;ll review it and get back to you soon.</CardDescription>
+        <CardDescription>
+          Fill out the form below to submit your application. We&apos;ll review it and get back to you soon.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <motion.form
@@ -86,7 +96,6 @@ export function ApplicationForm() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          encType="multipart/form-data"
         >
           <div className="space-y-2">
             <Label htmlFor="name">Full Name</Label>
@@ -110,25 +119,30 @@ export function ApplicationForm() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="message">Why do you want to join our team?</Label>
-            <Textarea id="message" name="message" placeholder="Tell us about your motivation and qualifications..." required />
+            <Textarea
+              id="message"
+              name="message"
+              placeholder="Tell us about your motivation and qualifications..."
+              required
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="resume">Upload Resume (Max 10MB)</Label>
             <div className="flex items-center space-x-2">
-              <Input 
-                id="resume" 
-                name="resume" 
-                type="file" 
-                className="hidden" 
-                onChange={handleFileChange} 
-                accept=".pdf,.doc,.docx" 
-                required 
+              <Input
+                id="resume"
+                name="resume"
+                type="file"
+                className="hidden"
+                onChange={handleFileChange}
+                accept=".pdf,.doc,.docx"
+             
               />
-              <Button type="button" variant="outline" onClick={() => document.getElementById('resume')?.click()}>
+              <Button type="button" variant="outline" onClick={() => document.getElementById("resume")?.click()}>
                 <Upload className="w-4 h-4 mr-2" />
                 Choose File
               </Button>
-              <span className="text-sm text-gray-500">{fileName || 'No file chosen'}</span>
+              <span className="text-sm text-gray-500">{fileName || "No file chosen"}</span>
             </div>
           </div>
           <Button type="submit" className="w-full" disabled={isLoading}>
@@ -138,7 +152,7 @@ export function ApplicationForm() {
                 Submitting...
               </>
             ) : (
-              'Submit Application'
+              "Submit Application"
             )}
           </Button>
         </motion.form>
